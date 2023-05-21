@@ -12,3 +12,4 @@ products_router.register('reviews', views.ReviewViewSet, basename='product-revie
 
 # URLConf
 urlpatterns = router.urls + products_router.urls
+
