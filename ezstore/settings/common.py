@@ -25,12 +25,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'django-insecure--(6zomn3!22b(h#mq6@8$yb881dpm9q_-n)do^=2%ak(my2q!a'
-SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -95,15 +91,7 @@ WSGI_APPLICATION = 'ezstore.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ezstore',
-        'HOST': 'localhost',
-        'USER': 'root',
-        'PASSWORD': os.environ.get('DATABASE_PASSWORD')
-    }
-}
+
 
 
 # Password validation
