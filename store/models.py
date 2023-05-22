@@ -4,7 +4,6 @@ from django.core.validators import MinValueValidator
 from django.db import models
 from uuid import uuid4
 
-# Create your models here.
 
 class Promotion(models.Model):
     description = models.CharField(max_length=255)
@@ -18,6 +17,9 @@ class Collection(models.Model):
 
     def __str__(self) -> str:
         return self.title
+
+    class Meta:
+        ordering = ['title']
 
 
 class Product(models.Model):
@@ -36,7 +38,10 @@ class Product(models.Model):
 
     def __str__(self) -> str:
         return self.title
-    
+
+    class Meta:
+        ordering = ['title']
+
 
 class Customer(models.Model):
     MEMBERSHIP_BRONZE = 'B'
@@ -68,6 +73,9 @@ class Customer(models.Model):
 
     class Meta:
         ordering = ['user__first_name', 'user__last_name']
+        permissions = [
+            ('view_history', 'Can view history')
+        ]
 
 
 class Order(models.Model):
@@ -90,10 +98,9 @@ class Order(models.Model):
             ('cancel_order', 'Can cancel order')
         ]
 
-    
 
 class OrderItem(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.PROTECT, related_name='items')
+    order = models.ForeignKey(Order, on_delete=models.PROTECT)
     product = models.ForeignKey(
         Product, on_delete=models.PROTECT, related_name='orderitems')
     quantity = models.PositiveSmallIntegerField()
@@ -105,13 +112,6 @@ class Address(models.Model):
     city = models.CharField(max_length=255)
     customer = models.ForeignKey(
         Customer, on_delete=models.CASCADE)
-
-
-class Review(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
-    name = models.CharField(max_length=255)
-    description = models.TextField()
-    date = models.DateField(auto_now_add=True)
 
 
 class Cart(models.Model):
@@ -129,3 +129,11 @@ class CartItem(models.Model):
 
     class Meta:
         unique_together = [['cart', 'product']]
+
+
+class Review(models.Model):
+    product = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name='reviews')
+    name = models.CharField(max_length=255)
+    description = models.TextField()
+    date = models.DateField(auto_now_add=True)
