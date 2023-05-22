@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'django_filters',
     'djoser',
     'debug_toolbar',
@@ -145,6 +146,13 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+DJOSER = {
+    'SERIALIZERS':{
+    "user_create": "core.serializers.UserCreateSerializer",
+   
+    }
+}
+
 REST_FRAMEWORK = {
     'COERCE_DECIMAL_TO_STRING': False,
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -164,5 +172,5 @@ DJOSER = {
 
 SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('JWT',),
-    'ACCESS_TOKEN_LIFETIME': timedelta(days=1)
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5)
 }
