@@ -10,6 +10,7 @@ drf-nested-routers = "*"
 django-filter = "*"
 djoser = "*"
 djangorestframework-simplejwt = "*"
+whitenoise = "*"
 
 [dev-packages]
 python-dotenv = "*"
